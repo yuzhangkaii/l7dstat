@@ -141,7 +141,7 @@ mkdir log
 mkdir logs
 npm install express
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/start.js
-echo -e "cd /root/l7dstat;nohup node start.js & >/dev/null 2>&1
+echo -e "cd /root/l7dstat/node;nohup node start.js & >/dev/null 2>&1
 为防止不生效,请手动复制上述规则,粘贴回车"
 echo -e "程序已经启动！"
 
