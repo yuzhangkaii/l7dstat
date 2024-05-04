@@ -86,7 +86,6 @@ rm -fr /root/l7dstat/two/3
 /bin/cp /root/l7dstat/two/2 /root/l7dstat/two/1
 /usr/bin/nohup /root/l7dstat/onebest & >/dev/null 2>&1
 ps -ef|grep start|awk '{print $2}'|xargs kill -9
-/usr/bin/nohup node /root/l7dstat/node/start.js & >/dev/null 2>&1
 ps -ef|grep twobest|awk '{print $2}'|xargs kill -9
 exit
 fi
