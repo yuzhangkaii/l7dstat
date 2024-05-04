@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 export LANG="zh_CN.UTF-8"
 export LC_ALL="zh_CN.UTF-8"
@@ -87,16 +87,15 @@ echo -e "删除成功"
 function install(){
 echo -e "如果提示安装失败, 请联系QQ3029238856"
 read -p "请输入Bot host"bot
-nostat=`node|wc -l`
+nostat=`yum list installed nodejs|grep nodejs| wc -l`
 if [ "$nostat" -eq 0 ]; then
 curl -sL https://rpm.nodesource.com/setup_17.x | bash -
 yum -y install nodejs
 fi
-npstat=`npm|wc -l`
+npstat=`yum list installed npm|grep npm| wc -l`
 if [ "$npstat" -eq 0 ]; then
 yum -y install npm
 fi
-
 sed -i ''/l7/d'' /etc/rc.local
 sed -i ''/l7/d'' /etc/rc.d/rc.local
 echo "/usr/bin/nohup sh /root/l7dstat/onebest & >/dev/null 2>&1" >> /etc/rc.d/rc.local
@@ -142,7 +141,7 @@ echo -e "iptables -A INPUT -p tcp --dport 2005 -j ACCEPT
 service iptables save
 service iptables restart
 systemctl restart iptables
-/usr/bin/nohup node /root/anticc/node/start.js & >/dev/null 2>&1;exit
+/usr/bin/nohup node /root/l7dstat/node/start.js & >/dev/null 2>&1;exit
 为防止规则不生效,请手动复制上述规则,粘贴回车"
 echo -e "程序已经启动！"
 
