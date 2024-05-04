@@ -1,4 +1,4 @@
-echo 'alias l7="curl -o dstat https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/dstat;dos2unix dstat;bash dstat"' >> /etc/profile
+echo 'alias l7="curl -o dstat https://mirror.ghproxy.com/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/dstat;dos2unix dstat;bash dstat"' >> /etc/profile
 
 echo "输入 
 source /etc/profile
