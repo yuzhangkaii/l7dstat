@@ -1,0 +1,77 @@
+#!/bin/bash
+
+
+PATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+
+
+jincheng2=`ps -ef|grep onebest|sed ''/grep/d''|awk '{print $2}'|wc -l`
+if (($jincheng2 >= 2)); then
+ps -ef|grep onebest|sed ''/grep/d''|awk '{print $2}'|sed '1d'|xargs kill -9
+fi
+
+export LANG="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
+
+
+
+
+function yan(){
+
+
+
+conn_num=`netstat -nat | grep -E "443|80" |sed ''/FIN_WAIT/d''|sed ''/TIME_WAIT/d''|sed ''/SYN_RECV/d''|wc -l`
+
+if (($conn_num >= 100)); then
+ddd=`date '+%T'`
+
+echo "攻击开始 $ddd" >> /root/l7dstat/logs
+
+
+ip=`curl ip.sb -4`
+date=`date "+%y%m%d%H%M%S"`
+sed ''s/ddd/$ddd/'' /root/l7dstat/one/1 -i
+sed ''s/ip/$ip/'' /root/l7dstat/one/1 -i
+sh /root/l7dstat/one/1
+sed ''s/keyt/"'"/g'' /root/l7dstat/one/3 -i
+sed ''s/key/'"'/g'' /root/l7dstat/one/3 -i
+sh /root/l7dstat/one/3
+rm -fr /root/l7dstat/one/3
+/bin/cp /root/l7dstat/one/2 /root/l7dstat/one/1
+nohup tshark -n -t a -R http.request -T fields -e "ip.src" -e "http.host" -e "http.request.uri" > /root/l7dstat/node/logs/$date.txt 2>&1 &
+echo "$date.txt" >> /root/l7dstat/httplogs.txt
+iptables -Z
+sleep 10
+kill -INT $(ps -ef|grep http.requ|sed ''/grep/d''|awk '{print $2}')
+logs=`cat /root/l7dstat/httplogs.txt|tail -n 1`
+most=`cat /root/l7dstat/node/logs/$logs`
+mostt=`echo "$most"|awk '{print $2}'`
+mosttt=`echo "$mostt"|sort `
+mostttt=`echo "$mosttt"| uniq -c`
+mosttttt=`echo "$mostttt"| sort -nr`
+mostttttt=`echo "$mosttttt"|head -1`
+mosttttttt=`echo "$mostttttt"|awk '{print $2}' `
+sed ''s/most/$mosttttttt/'' /root/l7dstat/three/1 -i
+sh /root/l7dstat/three/1
+sed ''s/keyt/"'"/g'' /root/l7dstat/three/3 -i
+sed ''s/key/'"'/g'' /root/l7dstat/three/3 -i
+sh /root/l7dstat/three/3
+rm -fr /root/l7dstat/three/3
+/bin/cp /root/l7dstat/three/2 /root/l7dstat/three/1
+/usr/bin/nohup /root/l7dstat/twobest & >/dev/null 2>&1
+nohup tshark -n -t a -R http.request -T fields -e "ip.src" -e "http.host" -e "http.request.uri" > /root/l7dstat/node/log/$date.txt 2>&1 &
+echo "$date.txt" >> /root/l7dstat/httplog.txt
+exit
+fi
+
+}
+
+
+
+while true
+do
+        yan
+        sleep 5
+done
+
+

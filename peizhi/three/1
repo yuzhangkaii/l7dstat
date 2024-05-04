@@ -1,0 +1,2 @@
+for qun in $(cat /root/l7dstat/curl/qun); do echo 'curl -H keyContent-Type: application/jsonkey -d keyt{keygroup_idkey: '$qun', keymessagekey: key检测成功!\n正在被攻击的网站是most\n正在监控key}keyt http://bothost/send_group_msg' >> /root/l7dstat/three/3; done
+for qq in $(cat /root/l7dstat/curl/qq); do echo 'curl -H keyContent-Type: application/jsonkey -d keyt{keyuser_idkey: '$qq', keymessagekey: key检测成功!\n正在被攻击的网站是most\n正在监控key}keyt http://bothost/send_private_msg' >> /root/l7dstat/three/3; done

@@ -1,0 +1,155 @@
+#!/bin/bash
+
+export LANG="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
+
+
+
+
+
+
+function main(){
+clear
+echo -e "
+1. ◎ 安装
+2. ◎ 卸载
+3. ◎ 增加QQ私聊提醒
+4. ◎ 删除QQ私聊提醒
+5. ◎ 增加群提醒
+6. ◎ 删除群提醒
+7. ◎ 停止程序
+8. ◎ 启动程序
+0. ◎ 退出脚本 （再次打开此脚本请使用l7命令）"
+read -p "请输入序号并回车：" num
+case "$num" in
+[1] ) (install);;
+[2] ) (uninstall);;
+[3] ) (addqq);;
+[4] ) (delqq);;
+[5] ) (addqun);;
+[6] ) (delqun);;
+[7] ) (stop);;
+[8] ) (start);;
+[0] ) ;;
+*) (main);;
+esac
+}
+
+
+
+
+
+
+
+
+
+
+function addqq(){
+
+read -p "请输入要提醒的QQ号码,请认真填写,确认无空格  " qq
+echo "$qq" >> /root/l7dstat/curl/qq
+echo -e "增加成功"
+
+
+}
+
+
+function delqq(){
+
+read -p "请输入要删除提醒的QQ号码,请认真填写,确认无空格  " qq
+sed ''s/$qq//'' /root/l7dstat/curl/qq -i
+echo -e "删除成功"
+
+
+}
+
+function addqun(){
+
+read -p "请输入要提醒的QQ号码,请认真填写,确认无空格  " qun
+echo "$qun" >> /root/l7dstat/curl/qun
+echo -e "增加成功"
+
+
+}
+
+
+function delqun(){
+
+read -p "请输入要删除提醒的QQ号码,请认真填写,确认无空格  " qun
+sed ''s/$qun//'' /root/l7dstat/curl/qun -i
+echo -e "删除成功"
+
+
+}
+
+
+
+function install(){
+echo -e "如果提示安装失败, 请联系QQ3029238856"
+read -p "请输入Bot host"bot
+chmod +x /usr/local/bin/l7
+sed -i ''/l7/d'' /etc/rc.local
+sed -i ''/l7/d'' /etc/rc.d/rc.local
+echo "/usr/bin/nohup sh /root/l7dstat/onebest & >/dev/null 2>&1" >> /etc/rc.d/rc.local
+chmod +x /etc/rc.d/rc.local
+chmod +x /etc/rc.local
+cd /root/
+mkdir l7dstat
+cd l7dstat
+mkdir curl
+mkdir one
+mkdir two
+mkdir three
+cd /root/l7dstat/one/
+wget http://download.anticc.club/l7dstat/peizhi/one/1 -O 1 > /dev/null 2>&1
+wget http://download.anticc.club/l7dstat/peizhi/one/1 -O 2 > /dev/null 2>&1
+cd /root/l7dstat/two/
+wget http://download.anticc.club/l7dstat/peizhi/two/1 -O 1 > /dev/null 2>&1
+wget http://download.anticc.club/l7dstat/peizhi/two/1 -O 2 > /dev/null 2>&1
+cd /root/l7dstat/three/
+wget http://download.anticc.club/l7dstat/peizhi/three/1 -O 1 > /dev/null 2>&1
+wget http://download.anticc.club/l7dstat/peizhi/three/1 -O 2 > /dev/null 2>&1
+sed -i 's/bothost/$bot/g' /root/l7dstat/one/1
+sed -i 's/bothost/$bot/g' /root/l7dstat/one/2
+sed -i 's/bothost/$bot/g' /root/l7dstat/two/1
+sed -i 's/bothost/$bot/g' /root/l7dstat/two/2
+sed -i 's/bothost/$bot/g' /root/l7dstat/three/1
+sed -i 's/bothost/$bot/g' /root/l7dstat/three/2
+cd /root/l7dstat/
+wget http://download.anticc.club/l7dstat/peizhi/onebest -O onebest > /dev/null 2>&1
+wget http://download.anticc.club/l7dstat/peizhi/check -O check > /dev/null 2>&1
+wget http://download.anticc.club/l7dstat/peizhi/twobest -O twobest > /dev/null 2>&1
+chmod +x onebest
+chmod +x twobest
+chmod +x /etc/rc.d/rc.local
+nohup /root/l7dstat/onebest & >/dev/null 2>&1
+mkdir /root/l7dstat/node
+cd /root/l7dstat/node
+mkdir log
+mkdir logs
+npm install express
+wget download.anticc.club/start.js
+echo -e "iptables -A INPUT -p tcp --dport 2005 -j ACCEPT
+service iptables save
+service iptables restart
+systemctl restart iptables
+/usr/bin/nohup node /root/anticc/node/start.js & >/dev/null 2>&1;exit
+为防止规则不生效,请手动复制上述规则,粘贴回车"
+echo -e "程序已经启动！"
+
+
+}
+
+
+
+
+
+function uninstall(){
+curl download.anticc.club/l7dstat/uninstall|bash
+
+}
+
+
+
+main
+rm -fr dstat

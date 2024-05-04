@@ -1,0 +1,104 @@
+#!/bin/bash
+
+
+PATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+jincheng=`ps -ef|grep twobest|sed ''/grep/d''|awk '{print $2}'|wc -l`
+if (($jincheng >= 2)); then
+ps -ef|grep twobest|sed ''/grep/d''|awk '{print $2}'|sed '1d'|xargs kill -9
+fi
+
+export LANG="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
+
+
+
+
+
+function yyy(){
+
+hhh=`netstat -nat | grep -E "443|80"|sed ''/FIN_WAIT/d''|sed ''/TIME_WAIT/d''|sed ''/SYN_RECV/d''|wc -l`
+logs=`cat /root/l7dstat/logs| wc -l`
+bbb=`cat /root/l7dstat/black_ip.txt | sort -u|wc -l`
+banip=`cat /root/l7dstat/black_ip.txt|sort -u`
+input=` iptables -n -v -L -t filter|grep Chain|grep INPUT|grep policy|awk '{print $7}'`
+output=` iptables -n -v -L -t filter|grep Chain|grep OUTPUT|grep policy|awk '{print $7}'`
+ddd=`date '+%T'`
+qqname=`curl https://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?uins=l7dstatkey3| iconv -f gb2312 -t utf-8|awk -F"," '{for(i=1;i<=NF;i++){print "\""$i"\""}}'|sed -n 7p|sed 's/\"//g'`
+
+if (($hhh <= 90)); then
+kill -INT $(ps -ef|grep http.requ|sed ''/grep/d''|awk '{print $2}')
+
+ip=`curl ip.sb -4`
+sed ''s/ddd/$ddd/'' /root/l7dstat/two/1 -i
+sed ''s/logs/$logs/'' /root/l7dstat/two/1 -i
+sed ''s/input/$input/'' /root/l7dstat/two/1 -i
+sed ''s/output/$output/'' /root/l7dstat/two/1 -i
+sed ''s/max/$max/'' /root/l7dstat/two/1 -i
+sed ''s/bbb/$bbb/'' /root/l7dstat/two/1 -i
+sed ''s/ip/$ip/'' /root/l7dstat/two/1 -i
+httplog=`cat /root/l7dstat/httplog.txt|tail -n 1`
+mustmu=`cat /root/l7dstat/node/log/$httplog`
+mustmut=`echo "$mustmu"|awk '{print $3}'`
+mustmutt=`echo "$mustmut"|sort`
+mustmuttt=`echo "$mustmutt" | uniq -c`
+mustmutttt=`echo "$mustmuttt"| sort -nr`
+mustmuttttt=`echo "$mustmutttt"|head -1`
+mustmutttttt=`echo "$mustmuttttt"|awk '{print $2}'`
+mustmuci=`echo "$mustmu"|awk '{print $3}'|sort| uniq -c| sort -nr|head -1|awk '{print $1}'`
+mustzhan=`echo "$mustmu" |awk '{print $2}'`
+mustzhant=`echo "$mustzhan"|sort`
+mustzhantt=`echo "$mustzhant" | uniq -c`
+mustzhanttt=`echo "$mustzhantt"| sort -nr`
+mustzhantttt=`echo "$mustzhanttt"|head -1`
+mustzhanttttt=`echo "$mustzhantttt"|awk '{print $2}'`
+mustzhanci=`echo "$mustmu" |awk '{print $2}'`
+mustzhancit=`echo "$mustzhanci"|sort` 
+mustzhancitt=`echo "$mustzhancit"| uniq -c`
+mustzhancittt=`echo "$mustzhancitt"| sort -nr`
+mustzhancitttt=`echo "$mustzhancittt"|head -1`
+mustzhancittttt=`echo "$mustzhancitttt"|awk '{print $1}'`
+mustip=`echo "$mustmu" |awk '{print $1}'`
+mustipt=`echo "$mustip"|sort`
+mustiptt=`echo "$mustipt" | uniq -c`
+mustipttt=`echo "$mustiptt"| sort -nr`
+mustiptttt=`echo "$mustipttt"|head -1`
+mustipttttt=`echo "$mustiptttt"|awk '{print $2}'`
+mustipci=`echo "$mustmu" |awk '{print $1}'`
+mustipcit=`echo "$mustipci"|sort`
+mustipcitt=`echo "$mustipcit" | uniq -c`
+mustipcittt=`echo "$mustipcitt"| sort -nr`
+mustipcitttt=`echo "$mustipcittt"|head -1`
+mustipcittttt=`echo "$mustipcitttt"|awk '{print $1}'`
+sed ''s/mustmuci/$mustmuci/'' /root/l7dstat/two/1 -i
+sed ''s%mustmu%$mustmutttttt%'' /root/l7dstat/two/1 -i
+sed ''s/mustzhanci/$mustzhancittttt/'' /root/l7dstat/two/1 -i
+sed ''s/mustzhan/$mustzhanttttt/'' /root/l7dstat/two/1 -i
+sed ''s/mustipci/$mustipcittttt/'' /root/l7dstat/two/1 -i
+sed ''s/mustip/$mustipttttt/'' /root/l7dstat/two/1 -i
+sed ''s/http11/$httplog/'' /root/l7dstat/two/1 -i
+sed ''s/ipdizhi/$ip/'' /root/l7dstat/two/1 -i
+sh /root/l7dstat/two/1
+sed ''s/keyt/"'"/g'' /root/l7dstat/two/3 -i
+sed ''s/key/'"'/g'' /root/l7dstat/two/3 -i
+sh /root/l7dstat/two/3
+rm -fr /root/l7dstat/two/3
+/bin/cp /root/l7dstat/two/2 /root/l7dstat/two/1
+/usr/bin/nohup /root/l7dstat/onebest & >/dev/null 2>&1
+ps -ef|grep start|awk '{print $2}'|xargs kill -9
+/usr/bin/nohup node /root/l7dstat/node/start.js & >/dev/null 2>&1
+ps -ef|grep twobest|awk '{print $2}'|xargs kill -9
+exit
+fi
+
+}
+
+
+
+
+while true
+do
+     
+         yyy
+        sleep 5
+done
