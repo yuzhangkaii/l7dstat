@@ -141,7 +141,8 @@ echo -e "iptables -A INPUT -p tcp --dport 2005 -j ACCEPT
 service iptables save
 service iptables restart
 systemctl restart iptables
-/usr/bin/nohup node /root/anticc/node/start.js & >/dev/null 2>&1;exit
+cd /root/anticc/node
+/usr/bin/nohup node start.js & >/dev/null 2>&1;exit
 为防止规则不生效,请手动复制上述规则,粘贴回车"
 echo -e "程序已经启动！"
 
