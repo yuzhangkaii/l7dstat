@@ -96,6 +96,10 @@ npstat=`yum list installed npm|grep npm| wc -l`
 if [ "$npstat" -eq 0 ]; then
 yum -y install npm
 fi
+wistat=`yum list installed wireshark|grep wireshark| wc -l`
+if [ "$wistat" -eq 0 ]; then
+yum install -y wireshark
+fi
 sed -i ''/l7/d'' /etc/rc.local
 sed -i ''/l7/d'' /etc/rc.d/rc.local
 echo "/usr/bin/nohup sh /root/l7dstat/onebest & >/dev/null 2>&1" >> /etc/rc.d/rc.local
