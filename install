@@ -1,4 +1,6 @@
-echo 'alias l7="curl -o dstat https://raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/dstat;bash dstat"' >> /etc/profile
+echo 'alias l7="curl -o dstat https://raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/dstat;dos2unix dstat;bash dstat"' >> /etc/profile
 
-echo "输入 source /etc/profile
+echo "输入 
+source /etc/profile
+ yum install dos2unix
 输入l7打开菜单"
