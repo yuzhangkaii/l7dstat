@@ -87,7 +87,16 @@ echo -e "删除成功"
 function install(){
 echo -e "如果提示安装失败, 请联系QQ3029238856"
 read -p "请输入Bot host"bot
-chmod +x /usr/local/bin/l7
+nostat=`node|wc -l`
+if [ "$nostat" -eq 0 ]; then
+curl -sL https://rpm.nodesource.com/setup_17.x | bash -
+yum -y install nodejs
+fi
+npstat=`npm|wc -l`
+if [ "$npstat" -eq 0 ]; then
+yum -y install npm
+fi
+
 sed -i ''/l7/d'' /etc/rc.local
 sed -i ''/l7/d'' /etc/rc.d/rc.local
 echo "/usr/bin/nohup sh /root/l7dstat/onebest & >/dev/null 2>&1" >> /etc/rc.d/rc.local
