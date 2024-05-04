@@ -141,8 +141,7 @@ echo -e "iptables -A INPUT -p tcp --dport 2005 -j ACCEPT
 service iptables save
 service iptables restart
 systemctl restart iptables
-cd /root/l7dstat/node
-/usr/bin/nohup node start.js & >/dev/null 2>&1;exit
+/usr/bin/nohup node /root/l7dstat/node/start.js & >/dev/null 2>&1;exit
 为防止规则不生效,请手动复制上述规则,粘贴回车"
 echo -e "程序已经启动！"
 
