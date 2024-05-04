@@ -17,7 +17,7 @@ export LC_ALL="zh_CN.UTF-8"
 
 function yyy(){
 
-hhh=`netstat -nat | grep -E "443|80"|sed ''/FIN_WAIT/d''|sed ''/TIME_WAIT/d''|sed ''/SYN_RECV/d''|wc -l`
+hhh=`netstat -nat | grep -E "443|80"|wc -l`
 logs=`cat /root/l7dstat/logs| wc -l`
 bbb=`cat /root/l7dstat/black_ip.txt | sort -u|wc -l`
 banip=`cat /root/l7dstat/black_ip.txt|sort -u`
