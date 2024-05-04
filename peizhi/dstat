@@ -86,7 +86,7 @@ echo -e "删除成功"
 
 function install(){
 echo -e "如果提示安装失败, 请联系QQ3029238856"
-read -p "请输入Bot host "bot
+read -p "请输入Bot host " bot
 nostat=`yum list installed nodejs|grep nodejs| wc -l`
 if [ "$nostat" -eq 0 ]; then
 curl -sL https://rpm.nodesource.com/setup_17.x | bash -
@@ -117,12 +117,12 @@ wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7ds
 cd /root/l7dstat/three/
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/three/1 -O 1 > /dev/null 2>&1
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/three/1 -O 2 > /dev/null 2>&1
-sed -i "s/bothost/$bot/g" /root/l7dstat/one/1
-sed -i "s/bothost/$bot/g" /root/l7dstat/one/2
-sed -i "s/bothost/$bot/g" /root/l7dstat/two/1
-sed -i "s/bothost/$bot/g" /root/l7dstat/two/2
-sed -i "s/bothost/$bot/g" /root/l7dstat/three/1
-sed -i "s/bothost/$bot/g" /root/l7dstat/three/2
+sed -i ''s/bothost/$bot/g'' /root/l7dstat/one/1
+sed -i ''s/bothost/$bot/g'' /root/l7dstat/one/2
+sed -i ''s/bothost/$bot/g'' /root/l7dstat/two/1
+sed -i ''s/bothost/$bot/g'' /root/l7dstat/two/2
+sed -i ''s/bothost/$bot/g'' /root/l7dstat/three/1
+sed -i ''s/bothost/$bot/g'' /root/l7dstat/three/2
 cd /root/l7dstat/
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/onebest -O onebest > /dev/null 2>&1
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/check -O check > /dev/null 2>&1
