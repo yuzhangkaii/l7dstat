@@ -1,4 +1,4 @@
-echo 'alias l7="curl https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/dstat |bash"' >> /etc/profile
+echo 'alias l7="curl -o dstat https://raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/dstat;bash dstat"' >> /etc/profile
 
 echo "输入 source /etc/profile
 输入l7打开菜单"
