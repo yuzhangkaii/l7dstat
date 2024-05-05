@@ -85,6 +85,7 @@ echo -e "删除成功"
 
 
 function install(){
+fuip=`curl ip.sb`
 echo -e "如果提示安装失败, 请联系QQ3029238856"
 read -p "请输入Bot host " bot
 nostat=`yum list installed nodejs|grep nodejs| wc -l`
@@ -133,6 +134,7 @@ wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7ds
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/twobest -O twobest > /dev/null 2>&1
 chmod +x onebest
 chmod +x twobest
+sed -i ''s/hostip/$fuip/g'' onebest
 chmod +x /etc/rc.d/rc.local
 nohup /root/l7dstat/onebest & >/dev/null 2>&1
 mkdir /root/l7dstat/node
