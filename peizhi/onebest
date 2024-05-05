@@ -20,7 +20,7 @@ function yan(){
 
 
 
-conn_num=`netstat -nat | grep -E "443|80" |wc -l`
+conn_num=`netstat -nat | grep -E ":443|:80" |wc -l`
 
 if (($conn_num >= 100)); then
 ddd=`date '+%T'`
