@@ -19,12 +19,11 @@ function yyy(){
 
 hhh=`netstat -nat | grep -E ":443|:80"|wc -l`
 logs=`cat /root/l7dstat/logs| wc -l`
-bbb=`cat /root/l7dstat/black_ip.txt | sort -u|wc -l`
-banip=`cat /root/l7dstat/black_ip.txt|sort -u`
+
+
 input=` iptables -n -v -L -t filter|grep Chain|grep INPUT|grep policy|awk '{print $7}'`
 output=` iptables -n -v -L -t filter|grep Chain|grep OUTPUT|grep policy|awk '{print $7}'`
 ddd=`date '+%T'`
-qqname=`curl https://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?uins=l7dstatkey3| iconv -f gb2312 -t utf-8|awk -F"," '{for(i=1;i<=NF;i++){print "\""$i"\""}}'|sed -n 7p|sed 's/\"//g'`
 
 if (($hhh <= 90)); then
 sharkeid=`cat /root/l7dstat/pid.txt`
