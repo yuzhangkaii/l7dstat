@@ -126,6 +126,8 @@ sed -i ''s/bothost/$bot/g'' /root/l7dstat/three/1
 sed -i ''s/bothost/$bot/g'' /root/l7dstat/three/2
 sed -i ''s/peiport/$port/g'' /root/l7dstat/two/1
 sed -i ''s/peiport/$port/g'' /root/l7dstat/two/2
+sed -i ''s/hostip/$fuip/g'' /root/l7dstat/two/1
+sed -i ''s/hostip/$fuip/g'' /root/l7dstat/two/2
 cd /root/l7dstat/
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/onebest -O onebest > /dev/null 2>&1
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/check -O check > /dev/null 2>&1
