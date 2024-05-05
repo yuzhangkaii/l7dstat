@@ -75,7 +75,7 @@ fi
 while true
 do
         yan
-        sleep 5
+        sleep 1
 done
 
 
