@@ -153,8 +153,8 @@ wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkaii/l7ds
 npm install
 sed -i ''s/hostip/$fuip/g'' tshark.sh
 sed -i ''s/peiport/$port/g'' index.js
-nohup bash /root/l7dstat/node/tshark.sh 300 > /dev/null 2>&1
-nohup node /root/l7dstat/node/index.js > /dev/null 2>&1
+nohup bash /root/l7dstat/node/tshark.sh 300 & > /dev/null 2>&1
+nohup node /root/l7dstat/node/index.js & > /dev/null 2>&1
 echo "请放行你输入的端口，程序已经执行"
 
 
