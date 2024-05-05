@@ -102,13 +102,6 @@ wistat=`yum list installed wireshark|grep wireshark| wc -l`
 if [ "$wistat" -eq 0 ]; then
 yum install -y wireshark
 fi
-sed -i ''/l7/d'' /etc/rc.local
-sed -i ''/l7/d'' /etc/rc.d/rc.local
-echo "/usr/bin/nohup sh /root/l7dstat/onebest & >/dev/null 2>&1" >> /etc/rc.d/rc.local
-echo "cd /root/l7dstat/node && nohup bash /root/l7dstat/node/tshark.sh 300 & > /dev/null 2>&1 && nohup node /root/l7dstat/node/index.js > /dev/null 2>&1" >> /etc/rc.d/rc.local
-
-chmod +x /etc/rc.d/rc.local
-chmod +x /etc/rc.local
 cd /root/
 mkdir l7dstat
 cd l7dstat
