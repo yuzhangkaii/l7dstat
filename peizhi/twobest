@@ -28,7 +28,7 @@ qqname=`curl https://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?uins=l7dstatkey
 
 if (($hhh <= 90)); then
 sharkeid=`cat /root/l7dstat/pid.txt`
-kill $sharkeid
+kill -9 $sharkeid
 
 ip=`curl ip.sb -4`
 sed ''s/ddd/$ddd/'' /root/l7dstat/two/1 -i
