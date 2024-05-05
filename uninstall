@@ -1,6 +1,3 @@
 ps -ef|grep l7dstat|awk '{print $2}'|xargs kill -9
 rm -fr /root/l7dstat
-iptables -D INPUT -p tcp --dport 2005 -j ACCEPT
-service iptables save
-service iptables restart
-systemctl restart iptables
+pkill tshark
