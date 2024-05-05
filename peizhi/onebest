@@ -38,14 +38,12 @@ sed ''s/key/'"'/g'' /root/l7dstat/one/3 -i
 sh /root/l7dstat/one/3
 rm -fr /root/l7dstat/one/3
 /bin/cp /root/l7dstat/one/2 /root/l7dstat/one/1
-capture_command="nohup tshark -n -t ad -Y 'http.host == hostip' -T fields -e frame.time -e ip.src -e http.host -e http.request.uri > /root/l7dstat/node/logs/$date.txt 2>&1 &"
-eval "$capture_command" &
-pid=$!
+logs_file="/root/l7dstat/node/logs/$date.txt"
+onetshark_pid=$(nohup tshark -n -t a -Y 'http.host == hostip' -R http.request -T fields -e "ip.src" -e "http.host" -e "http.request.uri" > "$logs_file" 2>&1 & echo $!)
 echo "$date.txt" >> /root/l7dstat/httplogs.txt
 iptables -Z
 sleep 10
-kill $pid
-wait $pid 2>/dev/null
+kill -9 $onetshark_pid
 logs=`cat /root/l7dstat/httplogs.txt|tail -n 1`
 most=`cat /root/l7dstat/node/logs/$logs`
 mostt=`echo "$most"|awk '{print $2}'`
@@ -63,10 +61,9 @@ rm -fr /root/l7dstat/three/3
 /bin/cp /root/l7dstat/three/2 /root/l7dstat/three/1
 /usr/bin/nohup /root/l7dstat/twobest & >/dev/null 2>&1
 
-twocapture_command="nohup tshark -n -t ad -Y 'http.host == hostip' -T fields -e frame.time -e ip.src -e http.host -e http.request.uri > /root/l7dstat/node/log/$date.txt 2>&1 &"
- eval "$twocapture_command" &
-    tpid=$!
-echo $tpid > pid.txt
+log_file="/root/l7dstat/node/log/$date.txt"
+twotshark_pid=$(nohup tshark -n -t a -Y 'http.host == hostip' -R http.request -T fields -e "ip.src" -e "http.host" -e "http.request.uri" > "$log_file" 2>&1 & echo $!)
+echo $twotshark_pid > pid.txt
 echo "$date.txt" >> /root/l7dstat/httplog.txt
 exit
 fi
