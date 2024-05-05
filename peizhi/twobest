@@ -27,7 +27,8 @@ ddd=`date '+%T'`
 qqname=`curl https://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?uins=l7dstatkey3| iconv -f gb2312 -t utf-8|awk -F"," '{for(i=1;i<=NF;i++){print "\""$i"\""}}'|sed -n 7p|sed 's/\"//g'`
 
 if (($hhh <= 90)); then
-kill -INT $(ps -ef|grep http.requ|sed ''/grep/d''|awk '{print $2}')
+sharkeid=`cat /root/l7dstat/pid.txt`
+kill $sharkeid
 
 ip=`curl ip.sb -4`
 sed ''s/ddd/$ddd/'' /root/l7dstat/two/1 -i
