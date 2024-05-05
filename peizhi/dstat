@@ -151,6 +151,7 @@ wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkaii/l7ds
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkaii/l7dstat/master/peizhi/index.js -O index.js > /dev/null 2>&1
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkaii/l7dstat/master/peizhi/tshark.sh -O tshark.sh > /dev/null 2>&1
 npm install
+sed -i ''s/hostip/$fuip/g'' tshark.sh
 sed -i ''s/peiport/$port/g'' index.js
 nohup bash /root/l7dstat/node/tshark.sh 300 > /dev/null 2>&1
 nohup node /root/l7dstat/node/index.js > /dev/null 2>&1
