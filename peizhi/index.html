@@ -72,8 +72,7 @@
           ],
         });
 
-        info.innerText = "Capturing requests from " + location.host + "/dstat";
-
+        info.innerText = "You need attack to " + "http://" + location.hostname + "     80 OR 443";
         let ws = new WebSocket(
           (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/"
         );
