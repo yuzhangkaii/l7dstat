@@ -65,7 +65,7 @@ echo -e "删除成功"
 
 function addqun(){
 
-read -p "请输入要提醒的QQ号码,请认真填写,确认无空格  " qun
+read -p "请输入要提醒的QQ群号码,请认真填写,确认无空格  " qun
 echo "$qun" >> /root/l7dstat/curl/qun
 echo -e "增加成功"
 
@@ -75,7 +75,7 @@ echo -e "增加成功"
 
 function delqun(){
 
-read -p "请输入要删除提醒的QQ号码,请认真填写,确认无空格  " qun
+read -p "请输入要删除提醒的QQ群号码,请认真填写,确认无空格  " qun
 sed ''s/$qun//'' /root/l7dstat/curl/qun -i
 echo -e "删除成功"
 
@@ -88,6 +88,7 @@ function install(){
 fuip=`curl ip.sb -4`
 echo -e "如果提示安装失败, 请联系QQ3029238856"
 read -p "请输入Bot host " bot
+read -p "请输入程序应用端口" port
 nostat=`yum list installed nodejs|grep nodejs| wc -l`
 if [ "$nostat" -eq 0 ]; then
 curl -sL https://rpm.nodesource.com/setup_17.x | bash -
@@ -128,6 +129,8 @@ sed -i ''s/bothost/$bot/g'' /root/l7dstat/two/1
 sed -i ''s/bothost/$bot/g'' /root/l7dstat/two/2
 sed -i ''s/bothost/$bot/g'' /root/l7dstat/three/1
 sed -i ''s/bothost/$bot/g'' /root/l7dstat/three/2
+sed -i ''s/peiport/$port/g'' /root/l7dstat/two/1
+sed -i ''s/peiport/$port/g'' /root/l7dstat/two/2
 cd /root/l7dstat/
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/onebest -O onebest > /dev/null 2>&1
 wget https://521github.com/extdomains/raw.githubusercontent.com/yuzhangkai1/l7dstat/master/peizhi/check -O check > /dev/null 2>&1
