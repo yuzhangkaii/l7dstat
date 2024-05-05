@@ -65,8 +65,8 @@ rm -fr /root/l7dstat/three/3
 
 twocapture_command="nohup tshark -n -t ad -Y 'http.host == hostip' -T fields -e frame.time -e ip.src -e http.host -e http.request.uri > /root/l7dstat/node/log/$date.txt 2>&1 &"
  eval "$twocapture_command" &
-    pid=$!
-ehco $pic > pid.txt
+    tpid=$!
+echo $tpid > pid.txt
 echo "$date.txt" >> /root/l7dstat/httplog.txt
 exit
 fi
